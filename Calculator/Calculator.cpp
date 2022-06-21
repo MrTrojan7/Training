@@ -67,7 +67,7 @@ void Operations(vector<int>& nums, vector<char>& operations)
 	if (IsHavePriorityOperation(operations))
 	{
 		//int count = operations.size();
-		for (int i = 0; operations.size() != 1 || i >= operations.size() - 1; i++)
+		for (int i = 0; i < operations.size(); i++)
 		{
 			switch (operations[i])
 			{
@@ -87,7 +87,8 @@ void Operations(vector<int>& nums, vector<char>& operations)
 			}
 		}
 	}
-	for (int i = 0; operations.size() != 1 || i >= operations.size() - 1; i++)
+
+	for (int i = 0; i < operations.size(); i++)
 	{
 		switch (operations[i])
 		{
