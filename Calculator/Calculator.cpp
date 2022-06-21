@@ -66,32 +66,46 @@ void Operations(vector<int>& nums, vector<char>& operations)
 	int result = 0;
 	if (IsHavePriorityOperation(operations))
 	{
-		for (int i = 0; i < nums.size() - 1; i++)
+		//int count = operations.size();
+		for (int i = 0; operations.size() != 1 || i >= operations.size() - 1; i++)
 		{
 			switch (operations[i])
 			{
-			case 42: nums[i + 1] = Multiplication(nums[i], nums[i + 1]); continue;
+			case 42: nums[i] = Multiplication(nums[i], nums[i + 1]); 
+				nums.erase(nums.begin() + i + 1);
+				operations.erase(operations.begin() + i);
+				continue;
 			//case '43': Plus(nums[i], nums[i + 1]);
 			//case '45': Minus(nums[i], nums[i + 1]);
-			case 47: nums[i + 1] = Division(nums[i], nums[i + 1]); continue;
+			case 47: 
+				nums[i] = Division(nums[i], nums[i + 1]); 
+				nums.erase(nums.begin() + i + 1);
+				operations.erase(operations.begin() + i);
+				continue;
 			default:
 				continue;
 			}
 		}
 	}
-	for (int i = 0; i < nums.size() - 1; i++)
+	for (int i = 0; operations.size() != 1 || i >= operations.size() - 1; i++)
 	{
 		switch (operations[i])
 		{
 		//case '42': Multiplication(nums[i], nums[i + 1]);
-		case 43: nums[i + 1] = Plus(nums[i], nums[i + 1]); continue;
-		case 45: nums[i + 1] = Minus(nums[i], nums[i + 1]); continue;
+		case 43: nums[i] = Plus(nums[i], nums[i + 1]); 
+			nums.erase(nums.begin() + i + 1); 
+			operations.erase(operations.begin() + i);
+			continue;
+		case 45: nums[i] = Minus(nums[i], nums[i + 1]); 
+			nums.erase(nums.begin() + i + 1); 
+			operations.erase(operations.begin() + i);
+			continue;
 		//case '47': Division(nums[i], nums[i + 1]);
 		default:
 			continue;
 		}
 	}
-	result = nums[nums.size() - 1];
+	result = nums[0];
 	cout << " = " << result << "\n";
 	Sleep(5000);
 	nums.clear();
@@ -113,7 +127,7 @@ int Minus(int& num1, int& num2)
 
 int Multiplication(int& num1, int& num2)
 {
-	return num1 + num2;
+	return num1 * num2;
 }
 
 int Division(int& num1, int& num2)
